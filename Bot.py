@@ -124,7 +124,7 @@ def minimax_search(board: Board.GUI_Board, depth = 5, maximizing = False):
     #Print information
     print("Nodes visited:", nodes_count)
     print("Best move value found:", best_value)
-    print("Best moves found:", best_moves)
+    print("Best moves found:", *best_moves)
     print("Chosen move:", chosen_move)
     return chosen_move
 
