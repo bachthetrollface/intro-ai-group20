@@ -140,7 +140,7 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
 
     tmp_board = chess.Board(board_fen)
     if (depth <= 0) or (tmp_board.is_game_over()):
-        return get_board_val(chess.Board(board_fen))
+        return get_board_val(tmp_board)
 
     moves = [move.uci() for move in tmp_board.generate_legal_moves()]
     
