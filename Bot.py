@@ -145,7 +145,7 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     moves = [move.uci() for move in tmp_board.generate_legal_moves()]
     
     if maximizing:
-        # Sort the moves by board value in ascending order
+        # Sort the moves by board value in descending order
         if depth >= 2:
             moves.sort(key = lambda x: get_move_value(x, board_fen), reverse=True)
         
@@ -170,7 +170,7 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
         return value_max
     
     else:
-        # Sort the moves by board value in descending order
+        # Sort the moves by board value in ascending order
         if depth >= 2:
             moves.sort(key = lambda x: get_move_value(x, board_fen))
         
