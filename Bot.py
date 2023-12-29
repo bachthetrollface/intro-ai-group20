@@ -141,20 +141,21 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     
     if maximizing:
         # Sort the moves by board value in ascending order
-        score = [get_board_val(tmp_board.push_san(move)) for move in moves]
-        best = []
-        for j in range(len(moves)):
-            max_value = -9999999
-            max_index = -1
-            for i in range(len(moves)):
-                if score[i] > max_value:
-                    max_value = score[i]
-                    max_index = i
-            del score[max_index]
-            best.append(moves[max_index])
-            del moves[max_index]
+        if depth >= 2:
+            score = [get_board_val(tmp_board.push_san(move)) for move in moves]
+            best = []
+            for j in range(len(moves)):
+                max_value = -9999999
+                max_index = -1
+                for i in range(len(moves)):
+                    if score[i] > max_value:
+                        max_value = score[i]
+                        max_index = i
+                del score[max_index]
+                best.append(moves[max_index])
+                del moves[max_index]
+            moves = best
         
-        moves = best
         value_max = -INFINITY
         for move in moves:
             nodes_count += 1
@@ -177,20 +178,21 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     
     else:
         # Sort the moves by board value in descending order
-        score = [get_board_val(tmp_board.push_san(move)) for move in moves]
-        best = []
-        for j in range(len(moves)):
-            min_value = 9999999
-            min_index = -1
-            for i in range(len(moves)):
-                if score[i] < min_value:
-                    min_value = score[i]
-                    min_index = i
-            del score[min_index]
-            best.append(moves[min_index])
-            del moves[min_index]
+        if depth >= 2:
+            score = [get_board_val(tmp_board.push_san(move)) for move in moves]
+            best = []
+            for j in range(len(moves)):
+                min_value = 9999999
+                min_index = -1
+                for i in range(len(moves)):
+                    if score[i] < min_value:
+                        min_value = score[i]
+                        min_index = i
+                del score[min_index]
+                best.append(moves[min_index])
+                del moves[min_index]
+            moves = best
         
-        moves = best
         value_min = INFINITY
         for move in moves:
             nodes_count += 1
