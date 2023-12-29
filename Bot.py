@@ -142,7 +142,11 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     if maximizing:
         # Sort the moves by board value in ascending order
         if depth >= 2:
-            score = [get_board_val(tmp_board.push_san(move)) for move in moves]
+            score = []
+            for move in moves:
+                tmp_board_2 = chess.Board(board_fen)
+                tmp_board_2.push_san(move)
+                score.append(get_board_val(tmp_board_2))
             best = []
             for j in range(len(moves)):
                 max_value = -9999999
@@ -179,7 +183,11 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     else:
         # Sort the moves by board value in descending order
         if depth >= 2:
-            score = [get_board_val(tmp_board.push_san(move)) for move in moves]
+            score = []
+            for move in moves:
+                tmp_board_2 = chess.Board(board_fen)
+                tmp_board_2.push_san(move)
+                score.append(get_board_val(tmp_board_2))
             best = []
             for j in range(len(moves)):
                 min_value = 9999999
