@@ -3,7 +3,7 @@ The capstone project of Group 20 for Introduction to Artificial Intelligence cou
 
 This is our chess program where the player will play against an intelligent agent designed to play chess.
 
-To load our work: 'git clone https://github.com/bachthetrollface/intro-ai-group20'
+To load our work: 'git clone https://github.com/bachthetrollface/intro-ai-group20.git'
 
 To install required libraries: 'pip install -q -r requirements.txt'
 
