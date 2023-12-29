@@ -128,6 +128,11 @@ def minimax_search(board: Board.GUI_Board, depth = 5, maximizing = False):
     print("Chosen move:", chosen_move)
     return chosen_move
 
+def get_move_value(move, board_fen):
+    tmp_board = chess.Board(board_fen)
+    tmp_board.push_san(move)
+    return get_board_val(tmp_board)
+
 def alpha_beta(board_fen, depth, a, b, maximizing):
     global best_moves
     global nodes_count
@@ -142,23 +147,7 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     if maximizing:
         # Sort the moves by board value in ascending order
         if depth >= 2:
-            score = []
-            for move in moves:
-                tmp_board_2 = chess.Board(board_fen)
-                tmp_board_2.push_san(move)
-                score.append(get_board_val(tmp_board_2))
-            best = []
-            for j in range(len(moves)):
-                max_value = -9999999
-                max_index = -1
-                for i in range(len(moves)):
-                    if score[i] > max_value:
-                        max_value = score[i]
-                        max_index = i
-                del score[max_index]
-                best.append(moves[max_index])
-                del moves[max_index]
-            moves = best
+            moves.sort(key = lambda x: get_move_value(x, board_fen), reverse=True)
         
         value_max = -INFINITY
         for move in moves:
@@ -183,23 +172,7 @@ def alpha_beta(board_fen, depth, a, b, maximizing):
     else:
         # Sort the moves by board value in descending order
         if depth >= 2:
-            score = []
-            for move in moves:
-                tmp_board_2 = chess.Board(board_fen)
-                tmp_board_2.push_san(move)
-                score.append(get_board_val(tmp_board_2))
-            best = []
-            for j in range(len(moves)):
-                min_value = 9999999
-                min_index = -1
-                for i in range(len(moves)):
-                    if score[i] < min_value:
-                        min_value = score[i]
-                        min_index = i
-                del score[min_index]
-                best.append(moves[min_index])
-                del moves[min_index]
-            moves = best
+            moves.sort(key = lambda x: get_move_value(x, board_fen))
         
         value_min = INFINITY
         for move in moves:
